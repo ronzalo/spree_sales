@@ -37,4 +37,6 @@ Simply add this require statement to your spec_helper:
 require 'spree_sales/factories'
 ```
 
-Copyright (c) 2014 [Gonzalo Moreno], released under the New BSD License
+Forked from <https://github.com/jonathandean/spree-sale-pricing>
+
+Copyright (c) 2014 Gonzalo Moreno <https://github.com/acidlabs/>, released under the New BSD License
