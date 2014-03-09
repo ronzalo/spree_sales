@@ -1,7 +1,7 @@
 SpreeSales
 ==========
 
-Introduction goes here.
+Add sales prices to products
 
 Installation
 ------------
@@ -37,4 +37,4 @@ Simply add this require statement to your spec_helper:
 require 'spree_sales/factories'
 ```
 
-Copyright (c) 2014 [name of extension creator], released under the New BSD License
+Copyright (c) 2014 [Gonzalo Moreno], released under the New BSD License
