@@ -1,0 +1,11 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  sale_price: "Sale Price"
+  original_price: "Original Price"
+  product_sale_prices: "Product Sale Prices"
+  add_product_sale_prices: "Add Product Sale Price"
+  sale_price_start_at: "Sale Start Date"
+  sale_price_end_at: "Sale End Date"
+  sale_price_enabled: "Enabled"

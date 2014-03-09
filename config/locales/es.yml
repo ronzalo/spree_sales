@@ -1,0 +1,8 @@
+es:
+  sale_price: "Precio Oferta"
+  original_price: "Precio Inicial"
+  product_sale_prices: "Precios de oferta del Producto"
+  add_product_sale_prices: "Agregar oferta"
+  sale_price_start_at: "Oferta empieza en"
+  sale_price_end_at: "Oferta termina en"
+  sale_price_enabled: "Habilitado"
