@@ -14,3 +14,4 @@ Deface::Override.new(virtual_path: "spree/admin/products/_form",
                      name: "replace_master_price_if_sale",
                      replace: "erb[loud]:contains('f.text_field :price')",
                      text: "<%= f.text_field :price, :value => number_to_currency(@product.original_price, :unit => '') %>",
+                     disabled: false)
