@@ -9,3 +9,8 @@ Deface::Override.new(virtual_path: "spree/admin/products/_form",
                      insert_top: "[data-hook='admin_product_form_right']",
                      text: "<%= ( Spree.t(:on_sale_from) + display_original_price(@product)) if @product.on_sale? %>",
                      disabled: false)
+
+Deface::Override.new(virtual_path: "spree/admin/products/_form",
+                     name: "replace_master_price_if_sale",
+                     replace: "erb[loud]:contains('f.text_field :price')",
+                     text: "<%= f.text_field :price, :value => number_to_currency(@product.original_price, :unit => '') %>",
