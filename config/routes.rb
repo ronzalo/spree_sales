@@ -6,5 +6,5 @@ Spree::Core::Engine.routes.draw do
   end
 
   get '/sale',       to: 'home#sale', as: :sale
-  get '/sale/t/:id/', to: 'home#sale', as: :sale_taxon
+  get '/sale/t/*id/', to: 'home#sale', as: :sale_taxon
 end
