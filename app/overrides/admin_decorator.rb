@@ -15,3 +15,9 @@ Deface::Override.new(virtual_path: "spree/admin/products/_form",
                      replace: "erb[loud]:contains('f.text_field :price')",
                      text: "<%= f.text_field :price, :value => number_to_currency(@product.original_price, :unit => '') %>",
                      disabled: false)
+
+Deface::Override.new(virtual_path: "spree/admin/variants/_form",
+                     name: "replace_variant_price_if_sale",
+                     replace: "erb[loud]:contains('f.text_field :price')",
+                     text: "<%= f.text_field :price, :value => number_to_currency(@variant.original_price, :unit => ''), :class => 'fullwidth' %>",
+                     disabled: false)
