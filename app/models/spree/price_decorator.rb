@@ -1,7 +1,7 @@
 Spree::Price.class_eval do
 
   has_many :sale_prices
-  
+
   def put_on_sale value, params={}
     new_sale(value, params).save
   end
@@ -15,7 +15,7 @@ Spree::Price.class_eval do
     sale_price = sale_prices.new({ value: value, start_at: start_at, end_at: end_at, enabled: enabled, calculator: calculator_type })
     sale_price
   end
-  
+
   # TODO make update_sale method
 
   def active_sale
@@ -31,7 +31,7 @@ Spree::Price.class_eval do
   def sale_price
     on_sale? ? active_sale.price : nil
   end
-  
+
   def sale_price=(value)
     on_sale? ? active_sale.update_attribute(:value, value) : put_on_sale(value)
   end
@@ -47,15 +47,15 @@ Spree::Price.class_eval do
   def original_price
     self[:amount]
   end
-  
+
   def original_price=(value)
     self.price = value
   end
-  
+
   def price
     on_sale? ? sale_price : original_price
   end
-  
+
   def amount
     price
   end
@@ -79,9 +79,9 @@ Spree::Price.class_eval do
     return nil unless active_sale.present?
     active_sale.stop
   end
-  
-  private 
-  
+
+  private
+
   def first_sale(scope)
     scope.order("created_at DESC").first
   end
