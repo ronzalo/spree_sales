@@ -8,7 +8,7 @@
     </legend>
     <%= form_for [:admin, @product, Spree::SalePrice.new], remote: true do |f| %>
       <div class="columns three">
-        <%= f.label :value, "Sale Price Amount" %>
+        <%= f.label :value, Spree.t(:sale_price) %>
         <%= f.text_field :value %>
       </div>
       <div class="columns three">
@@ -21,7 +21,7 @@
       </div>
       <div class="columns two">
         <%= f.label :submit, style: 'visibility: hidden;' %>
-        <%= f.submit "Add Sale Price" %>
+        <%= f.submit Spree.t("add_product_sale_prices") %>
       </div>
     <% end %>
   </fieldset>

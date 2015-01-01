@@ -1,0 +1,12 @@
+<h1 class="taxon-title">Sale</h1>
+
+<% content_for :sidebar do %>
+  <div data-hook="taxon_sidebar_navigation">
+    <%= render :partial => 'spree/shared/taxonomies' %>
+  </div>
+<% end %>
+
+<div data-hook="taxon_products">
+  <%= render :partial => 'spree/shared/products', :locals => { :products => @products, :taxon => @taxon } %>
+</div>
+

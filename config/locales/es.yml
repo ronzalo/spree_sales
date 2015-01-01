@@ -1,8 +1,21 @@
 es:
-  sale_price: "Precio Oferta"
-  original_price: "Precio Inicial"
-  product_sale_prices: "Precios de oferta del Producto"
-  add_product_sale_prices: "Agregar oferta"
-  sale_price_start_at: "Oferta empieza en"
-  sale_price_end_at: "Oferta termina en"
-  sale_price_enabled: "Habilitado"
+  spree:
+    sale_price: "Precio Oferta"
+    original_price: "Precio Inicial"
+    product_sale_prices: "Precios de oferta del Producto"
+    add_product_sale_prices: "Agregar oferta"
+    sale_price_start_at: "Oferta empieza en"
+    sale_price_end_at: "Oferta termina en"
+    sale_price_enabled: "Habilitado"
+    sale_price_active: "Activa"
+    on_sale_from: "Oferta de: "
+  activerecord:
+    attributes:
+      spree/sale_price:
+        value: Precio
+        start_at: Desde
+        end_at: Hasta
+    models:
+      spree/sale_price:
+        one: Oferta
+        other: Ofertas

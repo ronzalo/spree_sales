@@ -1,6 +1,6 @@
 <tr class="spree-product-sale-price" data-hook="products_row" id="<%= spree_dom_id(sale_price) %>">
   <td>
-    <%= active_for_sale_price(product, sale_price) ? 'Yes' : '' %>
+    <%= active_for_sale_price(product, sale_price) ? Spree.t(:yes) : '' %>
   </td>
   <td>
     <%= sale_price.display_price.to_html %>
