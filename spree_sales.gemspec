@@ -16,11 +16,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-<<<<<<< HEAD
   s.add_dependency 'spree_core', '~> 2.3.0'
-=======
-  s.add_dependency 'spree_core', '~> 2.2.0'
->>>>>>> Make sales_price compatible with spree 2.1 and Rails 4.x
 
   s.add_development_dependency 'capybara', '~> 2.1'
   s.add_development_dependency 'coffee-rails'
