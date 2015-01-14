@@ -35,6 +35,6 @@
     </tr>
   </thead>
   <tbody>
-    <%= render partial: "variant", collection: product.variants, locals: {product: product} %>
+    <%= render partial: "variant", collection: product.variants_including_master, locals: {product: product} %>
   </tbody>
 </table>

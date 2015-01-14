@@ -9,15 +9,15 @@
     <%= form_for [:admin, @product, Spree::SalePrice.new], remote: true do |f| %>
       <div class="columns three">
         <%= f.label :value, Spree.t(:sale_price) %>
-        <%= f.text_field :value %>
+        <%= f.text_field :value, required: true %>
       </div>
       <div class="columns three">
         <%= f.label :start_at %>
-        <%= f.text_field :start_at, class: "datepicker" %>
+        <%= f.text_field :start_at, class: "datepicker", required: true %>
       </div>
       <div class="columns three">
         <%= f.label :end_at %>
-        <%= f.text_field :end_at, class: "datepicker" %>
+        <%= f.text_field :end_at, class: "datepicker", required: true %>
       </div>
       <div class="columns two">
         <%= f.label :submit, style: 'visibility: hidden;' %>

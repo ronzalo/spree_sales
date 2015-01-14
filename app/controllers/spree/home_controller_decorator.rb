@@ -8,6 +8,7 @@ module Spree
       else
         @products = Spree::Product.in_sale
       end
+      @taxonomies = Spree::Taxonomy.includes(root: :children)
     end
   end
 end

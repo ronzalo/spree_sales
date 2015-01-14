@@ -1,5 +1,5 @@
 <% if variant.on_sale? %>
-  <% sale_price = variant.sale_prices.first %>
+  <% sale_price = variant.active_sale_in(Spree::Config[:currency]) %>
   <tr class="spree-product-sale-price" data-hook="products_row" id="<%= spree_dom_id(variant) %>">
     <td>
       <%= variant.sku %>
