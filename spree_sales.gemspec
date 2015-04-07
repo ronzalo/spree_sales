@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = '2.3.0'
   s.summary     = 'Add sales prices to products'
   s.description = 'Add sales prices to products'
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.1.0'
 
   s.author    = 'Gonzalo Moreno'
   s.email     = 'gmoreno@acid.cl'
