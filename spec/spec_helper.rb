@@ -29,8 +29,7 @@ require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/url_helpers'
 
-# Requires factories defined in lib/spree_sales/factories.rb
-require 'spree_sales/factories'
+FactoryGirl.find_definitions
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
@@ -77,6 +76,8 @@ RSpec.configure do |config|
   config.after :each do
     DatabaseCleaner.clean
   end
+
+  config.expose_current_running_example_as :example
 
   config.fail_fast = ENV['FAIL_FAST'] || false
 end

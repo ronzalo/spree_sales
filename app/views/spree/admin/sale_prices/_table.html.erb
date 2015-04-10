@@ -1,16 +1,23 @@
-<table class="index" data-hook="sale_price_table" id="product_sale_prices">
+<table class="table" data-hook="sale_price_table" id="product_sale_prices">
   <colgroup>
-    <col style="width: 10%"></col>
+    <col style="width: 15%"></col>
+    <col style="width: 5%"></col>
+    <col style="width: 15%"></col>
+    <col style="width: 15%"></col>
     <col style="width: 20%"></col>
-    <col style="width: 30%"></col>
-    <col style="width: 30%"></col>
-    <col style="width: 10%"></col>
+    <col style="width: 20%"></col>
     <col style="width: 10%"></col>
   </colgroup>
   <thead>
     <tr data-hook="products_header">
       <th>
+        <%= Spree.t('sku') %>
+      </th>
+      <th>
         <%= Spree.t('sale_price_active') %>
+      </th>
+      <th>
+        <%= Spree.t('price') %>
       </th>
       <th>
         <%= Spree.t('sale_price') %>
@@ -28,6 +35,6 @@
     </tr>
   </thead>
   <tbody>
-    <%= render partial: "sale_price", collection: product.master.sale_prices, locals: {product: product} %>
+    <%= render partial: "variant", collection: product.variants_including_master, locals: {product: product} %>
   </tbody>
 </table>
