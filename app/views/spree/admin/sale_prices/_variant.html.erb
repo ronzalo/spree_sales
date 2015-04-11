@@ -6,19 +6,25 @@
   </td>
   <td> <%= variant.sku_and_options_text %> </td>
   <td>
-    <table class="table table-bordered no-marginb">
-      <thead>
-        <th> <%= Spree.t('sale_price_active') %></th>
-        <th> <%= Spree.t('price') %> </th>
-        <th> <%= Spree.t('sale_price') %> </th>
-        <th> <%= Spree.t('sale_price_start_at') %> </th>
-        <th> <%= Spree.t('sale_price_end_at') %> </th>
-        <th> <%= Spree.t('sale_price_enabled') %> </th>
-        <th class="actions text-center"></th>
-      </thead>
-      <tbody>
-        <%= render partial: "sale_price", collection: variant.sale_prices, locals: { product: product, variant: variant } %>
-      </tbody>
-    </table>
+    <%- if variant.sale_prices.any? %>
+      <table class="table table-bordered no-marginb">
+        <thead>
+          <th> <%= Spree.t('sale_price_active') %></th>
+          <th> <%= Spree.t('price') %> </th>
+          <th> <%= Spree.t('sale_price') %> </th>
+          <th> <%= Spree.t('sale_price_start_at') %> </th>
+          <th> <%= Spree.t('sale_price_end_at') %> </th>
+          <th> <%= Spree.t('sale_price_enabled') %> </th>
+          <th class="actions text-center"></th>
+        </thead>
+        <tbody>
+          <%= render partial: "sale_price", collection: variant.sale_prices, locals: { product: product, variant: variant } %>
+        </tbody>
+      </table>
+    <%- else %>
+      <div class="no-objects-found alert alert-info">
+        <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::SalePrice)) %>
+      </div>
+    <% end %>
   </td>
 </tr>
