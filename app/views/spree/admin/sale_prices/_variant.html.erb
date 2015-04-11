@@ -1,29 +1,34 @@
-<% if variant.on_sale? %>
-  <% sale_price = variant.active_sale_in(Spree::Config[:currency]) %>
-  <tr class="spree-product-sale-price" data-hook="products_row" id="<%= spree_dom_id(variant) %>">
-    <td>
-      <%= variant.sku %>
-    </td>
-    <td>
-      <%= active_for_sale_price(variant, sale_price) ? Spree.t(:yes) : '' %>
-    </td>
-    <td>
-      <%= display_original_price(variant) %>
-    </td>
-    <td>
-      <%= sale_price.display_price.to_html %>
-    </td>
-    <td>
-      <%= sale_price.start_at.to_date %>
-    </td>
-    <td>
-      <%= sale_price.end_at.to_date %>
-    </td>
-    <td>
-      <%= sale_price.enabled %>
-    </td>
-    <td class="actions">
-      <%= link_to_delete sale_price, {:url => admin_product_sale_price_url(product, sale_price.id), :no_text => true} %>
-    </td>
-  </tr>
-<% end %>
+<tr id="<%= spree_dom_id variant %>">
+  <td class="image text-center">
+    <% if variant.images.present? %>
+      <%= image_tag variant.images.first.attachment.url(:mini) %>
+    <% end %>
+  </td>
+  <td> <%= variant.sku_and_options_text %> </td>
+  <td>
+    <table class="table table-bordered no-marginb">
+      <thead>
+        <th> <%= Spree.t('sale_price_active') %></th>
+        <th> <%= Spree.t('price') %> </th>
+        <th> <%= Spree.t('sale_price') %> </th>
+        <th> <%= Spree.t('sale_price_start_at') %> </th>
+        <th> <%= Spree.t('sale_price_end_at') %> </th>
+        <th> <%= Spree.t('sale_price_enabled') %> </th>
+        <th class="actions text-center"></th>
+      </thead>
+      <tbody>
+        <%- variant.sale_prices.each do |sale_price| %>
+          <tr class="spree-product-sale-price" id="<%= spree_dom_id(variant) %>">
+            <td> <%= active_for_sale_price(variant, sale_price) ? Spree.t(:yes) : '' %> </td>
+            <td> <%= display_original_price(variant) %> </td>
+            <td> <%= sale_price.display_price.to_html %> </td>
+            <td> <%= sale_price.start_at.to_date %> </td>
+            <td> <%= sale_price.end_at.to_date %> </td>
+            <td> <%= sale_price.enabled %> </td>
+            <td class="actions"> <%= link_to_delete sale_price, {:url => admin_product_sale_price_url(product, sale_price.id), :no_text => true} %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </td>
+</tr>
