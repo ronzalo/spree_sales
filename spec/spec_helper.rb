@@ -40,8 +40,8 @@ RSpec.configure do |config|
   #
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
-  config.include Spree::TestingSupport::UrlHelpers
-
+  config.include Spree::TestingSupport
+  config.include Rails.application.routes.url_helpers
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

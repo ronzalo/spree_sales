@@ -1,7 +1,7 @@
 <tr class="spree-product-sale-price" id="<%= spree_dom_id(variant) %>">
   <td> <%= active_for_sale_price(variant, sale_price) ? Spree.t(:yes) : '' %> </td>
   <td> <%= display_original_price(variant) %> </td>
-  <td> <%= sale_price.display_price.to_html %> </td>
+  <td> <%= sale_price.display_price.to_html %></td>
   <td> <%= sale_price.start_at.to_date %> </td>
   <td> <%= sale_price.end_at.to_date %> </td>
   <td> <%= sale_price.enabled %> </td>
