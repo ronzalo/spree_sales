@@ -2,6 +2,7 @@ module Spree
   class SalePrice < ActiveRecord::Base
 
     # TODO validations
+    belongs_to :default_price, :class_name => "Spree::Price", :foreign_key => "price_id"
     belongs_to :price, :class_name => "Spree::Price"
     has_one :calculator, :class_name => "Spree::Calculator", :as => :calculable, :dependent => :destroy
 
@@ -11,6 +12,8 @@ module Spree
     validates_presence_of :start_at, :end_at
     validates :value, :numericality => { :greater_than => 0 }
     validate :end_date_is_after_start_date
+
+    delegate_belongs_to :default_price, :currency
 
     scope :active, -> { where(enabled: true).where('(start_at <= ? OR start_at IS NULL) AND (end_at >= ? OR end_at IS NULL)', Time.now, Time.now) }
 
@@ -48,7 +51,7 @@ module Spree
 
     # Convenience method for displaying the price of a given sale_price in the table
     def display_price
-      Spree::Money.new(value, {currency: Spree::Config[:currency]})
+      Spree::Money.new(value, {currency: currency})
     end
 
     private

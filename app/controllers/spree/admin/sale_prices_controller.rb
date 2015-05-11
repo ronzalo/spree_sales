@@ -13,16 +13,16 @@ module Spree
 
       # Create a new sale price
       def create
-        @sale_price = @product.put_on_sale params[:sale_price][:value], sale_price_params
-        respond_with(@sale_price)
+        @product.put_on_sale params[:sale_price][:value], sale_price_params
+        redirect_to admin_product_sale_prices_path(@product)
       end
 
       # Destroy a sale price
       def destroy
-        @sale_price = Spree::SalePrice.find(params[:id])
-        @sale_price.destroy
+        sale_price = Spree::SalePrice.find(params[:id])
+        sale_price.destroy
 
-        respond_with(@sale_price)
+        respond_with(sale_price)
       end
 
 
