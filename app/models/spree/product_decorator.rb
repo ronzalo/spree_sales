@@ -44,11 +44,10 @@ Spree::Product.class_eval do
   end
 
   private
-
-  def run_on_variants(all_variants, &block)
-    if all_variants && variants.present?
-      variants.each { |v| block.call v }
+    def run_on_variants(all_variants, &block)
+      if all_variants && variants.present?
+        variants.each { |v| block.call v }
+      end
+      block.call master
     end
-    block.call master
-  end
 end
