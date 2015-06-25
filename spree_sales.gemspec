@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email     = 'gmoreno@acid.cl'
   s.homepage  = 'http://www.acid.cl'
   s.license   = 'MIT'
-  
+
   #s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'spree_core', '~> 3.0.0'
   s.add_dependency 'spree_frontend', '~> 3.0.0'
+  s.add_dependency 'date_validator'
+
   s.add_development_dependency('rspec-rails',  '~> 2.7')
   s.add_development_dependency('sqlite3')
   s.add_development_dependency('simplecov')

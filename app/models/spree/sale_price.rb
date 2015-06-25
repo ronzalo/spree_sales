@@ -9,9 +9,10 @@ module Spree
     accepts_nested_attributes_for :calculator
 
     validates :calculator, :presence => true
-    validates_presence_of :start_at
     validates :value, :numericality => { :greater_than => 0 }
-    validate :end_date_is_after_start_date
+
+    validates_presence_of :start_at
+    validates :end_at, date: { after: :start_at, allow_blank: true }
 
     delegate_belongs_to :default_price, :currency
 
@@ -53,15 +54,5 @@ module Spree
     def display_price
       Spree::Money.new(value, {currency: currency})
     end
-
-    private
-
-      def end_date_is_after_start_date
-        return if end_at.blank? || start_at.blank?
-
-        if end_at < start_at
-          errors.add(:end_at, "cannot be before the start date")
-        end
-      end
   end
 end
