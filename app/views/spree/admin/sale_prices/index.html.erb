@@ -7,16 +7,16 @@
     <div class="panel-body">
     <%= form_for [:admin, @product, Spree::SalePrice.new] do |f| %>
       <div class="row">
-        <div class="col-md-2 form-group">
-          <%= f.label :value, Spree.t(:sale_price) %>
+        <div class="col-md-4 form-group">
+          <%= f.label :value, raw(Spree.t(:sale_price) + content_tag(:span, ' *', class: 'required')) %>
           <%= f.text_field :value, class: "form-control", required: true %>
         </div>
-        <div class="col-md-5 form-group">
-          <%= f.label :start_at %>
+        <div class="col-md-4 form-group">
+          <%= f.label :start_at, raw(Spree::SalePrice.human_attribute_name(:start_at) + content_tag(:span, ' *', class: 'required')) %>
           <%= f.text_field :start_at, class: "datepicker form-control", required: true %>
         </div>
-        <div class="col-md-5 form-group">
-          <%= f.label :end_at %>
+        <div class="col-md-4 form-group">
+          <%= f.label :end_at, raw(Spree::SalePrice.human_attribute_name(:end_at) + content_tag(:span, ' *', class: 'required')) %>
           <%= f.text_field :end_at, class: "datepicker form-control", required: true %>
         </div>
       </div>
