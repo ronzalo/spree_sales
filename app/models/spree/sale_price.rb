@@ -22,6 +22,13 @@ module Spree
     #def self.calculators
     #  Rails.application.config.spree.calculators.send(self.to_s.tableize.gsub('/', '_').sub('spree_', ''))
     #end
+    def initialize attrs={}
+      attrs[:calculator] = attrs[:calculator].constantize.new() if attrs[:calculator].present?
+
+      # ToDo - Pendiente queda asignar el id del precio que se esta cambiando
+
+      super attrs
+    end
 
     def calculator_type
       calculator.class.to_s if calculator
