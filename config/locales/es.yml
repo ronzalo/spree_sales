@@ -12,6 +12,11 @@ es:
     sale_price_enabled: "Habilitado"
     sale_price_active: "Activa"
     on_sale_from: "Oferta de: "
+    sale_calculators:
+      amount_sale_price_calculator:
+        name: Nuevo precio de venta
+      percent_off_sale_price_calculator:
+        name: Porcentaje sobre el precio de venta
   activerecord:
     attributes:
       spree/sale_price:

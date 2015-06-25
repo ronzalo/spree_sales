@@ -12,6 +12,11 @@ en:
     sale_price_enabled: "Enabled"
     sale_price_active: "Active"
     on_sale_from: "On Sale From: "
+    sale_calculators:
+      amount_sale_price_calculator:
+        name: Amount sale price
+      percent_off_sale_price_calculator:
+        name: Percent off sale price
   activerecord:
     attributes:
       spree/sale_price:
