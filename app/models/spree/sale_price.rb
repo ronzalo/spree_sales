@@ -9,7 +9,7 @@ module Spree
     accepts_nested_attributes_for :calculator
 
     validates :calculator, :presence => true
-    validates_presence_of :start_at, :end_at
+    validates_presence_of :start_at
     validates :value, :numericality => { :greater_than => 0 }
     validate :end_date_is_after_start_date
 

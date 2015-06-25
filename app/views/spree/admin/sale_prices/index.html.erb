@@ -1,31 +1,7 @@
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Product Sale Prices"} %>
 <%= csrf_meta_tag %>
-<div id="add_sales_price_form" class="panel panel-default">
-  <div class="panel-heading">
-    <h1 class="panel-title"><%= Spree.t('add_product_sale_prices') %></h1>
-  </div>
-    <div class="panel-body">
-    <%= form_for [:admin, @product, Spree::SalePrice.new] do |f| %>
-      <div class="row">
-        <div class="col-md-4 form-group">
-          <%= f.label :value, raw(Spree.t(:sale_price) + content_tag(:span, ' *', class: 'required')) %>
-          <%= f.text_field :value, class: "form-control", required: true %>
-        </div>
-        <div class="col-md-4 form-group">
-          <%= f.label :start_at, raw(Spree::SalePrice.human_attribute_name(:start_at) + content_tag(:span, ' *', class: 'required')) %>
-          <%= f.text_field :start_at, class: "datepicker form-control", required: true %>
-        </div>
-        <div class="col-md-4 form-group">
-          <%= f.label :end_at, raw(Spree::SalePrice.human_attribute_name(:end_at) + content_tag(:span, ' *', class: 'required')) %>
-          <%= f.text_field :end_at, class: "datepicker form-control", required: true %>
-        </div>
-      </div>
-      <div class="form-actions text-center" data-hook="buttons">
-        <%= f.submit Spree.t("add_product_sale_prices"), class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-  </div>
-</div>
+
+<%= render 'spree/admin/sale_prices/form' %>
 
 <div id="product-sale-prices-table">
   <%= render partial: "table", locals: { product: @product } %>
