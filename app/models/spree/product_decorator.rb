@@ -21,7 +21,7 @@ Spree::Product.class_eval do
 
   # TODO also accept a class reference for calculator type instead of only a string
   def put_on_sale value, params={}
-    if params[:variant] and (params[:variant] == 'all_variants' or params[:variant] == :all_variants)
+    if !params[:variant] or params[:variant] == 'all_variants' or params[:variant] == :all_variants
       run_on_variants(true) { |v| v.put_on_sale(value, params) }
     elsif params[:variant]
       variants.find(params[:variant]).put_on_sale(value, params) if variants.exists?(id: params[:variant])
