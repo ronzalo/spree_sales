@@ -10,10 +10,10 @@ Spree::Price.class_eval do
     sale_price = sale_prices.new
 
     sale_price.value      = value
-    sale_price.calculator = params[:calculator] ? params[:calculator].constantize.new : Spree::Calculator::DollarAmountSalePriceCalculator.new
+    sale_price.calculator = params[:calculator] ? params[:calculator].constantize.new : Spree::Calculator::AmountSalePriceCalculator.new
     sale_price.start_at   = params[:start_at] || Time.now
-    sale_price.end_at     = params[:end_at] || nil
-    sale_price.enabled    = params[:enabled] || true
+    sale_price.end_at     = params[:end_at]   || nil
+    sale_price.enabled    = params[:enabled]  || true
 
     sale_price
   end
