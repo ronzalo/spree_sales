@@ -15,8 +15,8 @@ module Spree
       def create
         @sale_price = Spree::SalePrice.new sale_price_params
 
-        if @sale_price.save
-          # @product.put_on_sale sale_price_params[:value], sale_price_params
+        if @sale_price.valid?
+          @product.put_on_sale sale_price_params[:value], sale_price_params
           redirect_to admin_product_sale_prices_path(@product)
         else
           render :index
@@ -43,6 +43,11 @@ module Spree
         # Load product sale_prices as a before filter.
         def load_sale_prices
           @sale_prices = @product.sale_prices
+
+          @variants = @product.variants.map do |variant|
+            [variant.id, variant.sku_and_options_text]
+          end
+          @variants.insert(0, [:all_variants, Spree.t(:all_variants)])
         end
 
         # Sale price params
@@ -55,6 +60,8 @@ module Spree
             # :enabled,
             # :all_variants,
             # :all_currencies,
+            :currency,
+            :variant,
             :calculator
           )
         end

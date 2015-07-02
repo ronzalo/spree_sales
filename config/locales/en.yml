@@ -17,6 +17,7 @@ en:
         name: Amount sale price
       percent_off_sale_price_calculator:
         name: Percent off sale price
+    all_currencies: All in use
   activerecord:
     attributes:
       spree/sale_price:

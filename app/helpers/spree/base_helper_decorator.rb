@@ -20,4 +20,15 @@ Spree::BaseHelper.class_eval do
   def active_for_sale_price product, sale_price
     product.current_sale_in(Spree::Config[:currency]) == sale_price
   end
+
+  def spree_sale_currencies
+    currencies = ::Money::Currency.table.map do |code, details|
+      iso = details[:iso_code]
+      [iso, "#{details[:name]} (#{iso})"]
+    end
+
+    currencies << [:all_currencies, Spree.t(:all_currencies)]
+
+    options_from_collection_for_select(currencies, :first, :last, :all_currencies)
+  end
 end
