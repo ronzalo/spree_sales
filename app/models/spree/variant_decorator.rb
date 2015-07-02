@@ -5,7 +5,8 @@ Spree::Variant.class_eval do
   delegate_belongs_to :default_price, :sale_price, :original_price, :on_sale?
 
   def put_on_sale value, params={}
-    all_currencies = params[:all_variants] || true    
+    all_currencies = params[:all_currencies] || true
+
     run_on_prices(all_currencies) { |p| p.put_on_sale value, params }
   end
   alias :create_sale :put_on_sale
@@ -25,11 +26,11 @@ Spree::Variant.class_eval do
   def sale_price_in(currency)
     Spree::Price.new variant_id: self.id, currency: currency, amount: price_in(currency).sale_price
   end
-  
+
   def discount_percent_in(currency)
     price_in(currency).discount_percent
   end
-  
+
   def on_sale_in?(currency)
     price_in(currency).on_sale?
   end
@@ -53,14 +54,13 @@ Spree::Variant.class_eval do
   def stop_sale(all_currencies=true)
     run_on_prices(all_currencies) { |p| p.stop_sale }
   end
-  
+
   private
-   
-  def run_on_prices(all_currencies, &block)
-    if all_currencies && prices.present?
-      prices.each { |p| block.call p }
-    else
-      block.call default_price  
+    def run_on_prices(all_currencies, &block)
+      if all_currencies && prices.present?
+        prices.each { |p| block.call p }
+      else
+        block.call default_price
+      end
     end
-  end
 end

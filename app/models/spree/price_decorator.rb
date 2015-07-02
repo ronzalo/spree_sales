@@ -7,12 +7,14 @@ Spree::Price.class_eval do
   end
 
   def new_sale value, params={}
-    calculator_type = params[:calculator_type] || Spree::Calculator::DollarAmountSalePriceCalculator.new
-    start_at = params[:start_at] || Time.now
-    end_at = params[:end_at] || nil
-    enabled = params[:enabled] || true
+    sale_price = sale_prices.new
 
-    sale_price = sale_prices.new({ value: value, start_at: start_at, end_at: end_at, enabled: enabled, calculator: calculator_type })
+    sale_price.value      = value
+    sale_price.calculator = params[:calculator] ? params[:calculator].constantize.new : Spree::Calculator::DollarAmountSalePriceCalculator.new
+    sale_price.start_at   = params[:start_at] || Time.now
+    sale_price.end_at     = params[:end_at] || nil
+    sale_price.enabled    = params[:enabled] || true
+
     sale_price
   end
 
@@ -81,8 +83,7 @@ Spree::Price.class_eval do
   end
 
   private
-
-  def first_sale(scope)
-    scope.order("created_at DESC").first
-  end
+    def first_sale(scope)
+      scope.order("created_at DESC").first
+    end
 end
