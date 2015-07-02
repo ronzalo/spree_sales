@@ -9,21 +9,33 @@
       <div class="row">
         <% sale_calculators =  [Spree::Calculator::AmountSalePriceCalculator, Spree::Calculator::PercentOffSalePriceCalculator] %>
         <% options = options_for_select(sale_calculators.map(&:name).map {|name| [Spree.t("sale_calculators.#{name.demodulize.underscore}.name"), name] }) %>
-        <div class="col-md-3 form-group">
+        <div class="col-md-4 form-group">
           <%= f.label :calculator %>
           <%= f.select :calculator, options, {}, {:class => 'select2'} %>
         </div>
 
-        <div class="col-md-3 form-group">
+        <div class="col-md-4 form-group">
+          <%= f.label :currency %>
+          <%= select_tag "sale_price[currency]", spree_sale_currencies, class: 'select2' %>
+        </div>
+
+        <div class="col-md-4 form-group">
+          <%= f.label :variant %>
+          <%= select_tag "sale_price[variant]", options_from_collection_for_select(@variants, :first, :last, :all_variants), class: 'select2' %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 form-group">
           <%= f.label :value, raw(Spree.t(:sale_price) + content_tag(:span, ' *', class: 'required')) %>
           <%= f.text_field :value, class: "form-control", required: true %>
         </div>
 
-        <div class="col-md-3 form-group">
+        <div class="col-md-4 form-group">
           <%= f.label :start_at, raw(Spree::SalePrice.human_attribute_name(:start_at) + content_tag(:span, ' *', class: 'required')) %>
           <%= f.text_field :start_at, class: "datepicker form-control", required: true %>
         </div>
-        <div class="col-md-3 form-group">
+        <div class="col-md-4 form-group">
           <%= f.label :end_at %>
           <%= f.text_field :end_at, class: "datepicker form-control" %>
         </div>
