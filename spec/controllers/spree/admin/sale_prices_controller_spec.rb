@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Spree::Admin::SalePricesController, type: :controller do
   routes { Spree::Core::Engine.routes }
   let(:sale_price) { mock_model(Spree::SalePrice) }
-  let(:product) { mock_model(Spree::Product) }
+  let(:product) { mock_model(Spree::Product, touch: nil) }
 
   before do
     allow(Spree::Product).to receive(:find_by).and_return(product)
@@ -21,6 +21,11 @@ describe Spree::Admin::SalePricesController, type: :controller do
 
     it 'deletes the sale price' do
       expect(sale_price).to receive(:destroy)
+      delete :destroy, id: 1337, product_id: 42, format: :js
+    end
+
+    it 'touches the product, effectively renewing the cache' do
+      expect(product).to receive(:touch)
       delete :destroy, id: 1337, product_id: 42, format: :js
     end
   end
