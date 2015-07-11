@@ -24,6 +24,7 @@ Spree::Product.class_eval do
     all_variants = params[:all_variants] || true
 
     run_on_variants(all_variants) { |v| v.put_on_sale(value, params) }
+    touch
   end
   alias :create_sale :put_on_sale
 
