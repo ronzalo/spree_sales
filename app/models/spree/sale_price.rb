@@ -35,7 +35,7 @@ module Spree
       calculator.class.to_s if calculator
     end
 
-    def price
+    def new_amount
       calculator.compute self
     end
 
@@ -60,7 +60,7 @@ module Spree
 
     # Convenience method for displaying the price of a given sale_price in the table
     def display_price
-      Spree::Money.new(price, {currency: currency})
+      Spree::Money.new(new_amount, {currency: currency})
     end
   end
 end

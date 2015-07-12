@@ -31,7 +31,7 @@ Spree::Price.class_eval do
   alias :next_current_sale :next_active_sale
 
   def sale_price
-    on_sale? ? active_sale.price : nil
+    on_sale? ? active_sale.new_amount : nil
   end
 
   def sale_price=(value)
