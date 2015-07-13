@@ -52,13 +52,9 @@ module Spree
         # Sale price params
         def sale_price_params
           params.require(:sale_price).permit(
-            # :id,
             :value,
             :start_at,
             :end_at,
-            # :enabled,
-            # :all_variants,
-            # :all_currencies,
             :currency,
             :variant,
             :calculator
