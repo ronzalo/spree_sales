@@ -31,4 +31,12 @@ Spree::BaseHelper.class_eval do
 
     options_from_collection_for_select(currencies, :first, :last, Spree::Config[:currency])
   end
+
+  def sale_calculators
+    calculators = Spree::SalesConfiguration::Config.calculators.map do |calculator|
+      [Spree.t("sale_calculators.#{calculator.name.demodulize.underscore}.name"), calculator.name]
+    end
+
+    options_for_select(calculators)
+  end
 end

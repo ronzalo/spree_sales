@@ -7,11 +7,9 @@
     <div class="panel-body">
     <%= form_for [:admin, @product, @sale_price] do |f| %>
       <div class="row">
-        <% sale_calculators =  [Spree::Calculator::AmountSalePriceCalculator, Spree::Calculator::PercentOffSalePriceCalculator] %>
-        <% options = options_for_select(sale_calculators.map(&:name).map {|name| [Spree.t("sale_calculators.#{name.demodulize.underscore}.name"), name] }) %>
         <div class="col-md-4 form-group">
           <%= f.label :calculator %>
-          <%= f.select :calculator, options, {}, {:class => 'select2'} %>
+          <%= f.select :calculator, sale_calculators, {}, {:class => 'select2'} %>
         </div>
 
         <div class="col-md-4 form-group">
