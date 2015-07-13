@@ -43,7 +43,7 @@ module Spree
         def load_sale_prices
           @sale_prices = @product.sale_prices
 
-          @variants = @product.variants.map do |variant|
+          @variants = @product.variants_including_master.map do |variant|
             [variant.id, variant.sku_and_options_text]
           end
           @variants.insert(0, [:all_variants, Spree.t(:all_variants)])
