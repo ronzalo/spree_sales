@@ -29,6 +29,6 @@ Spree::BaseHelper.class_eval do
 
     currencies << [:all_currencies, Spree.t(:all_currencies)]
 
-    options_from_collection_for_select(currencies, :first, :last, :all_currencies)
+    options_from_collection_for_select(currencies, :first, :last, Spree::Config[:currency])
   end
 end
