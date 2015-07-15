@@ -24,7 +24,7 @@ Spree::Product.class_eval do
     if !params[:variant] or params[:variant] == 'all_variants' or params[:variant] == :all_variants
       run_on_variants(true) { |v| v.put_on_sale(value, params) }
     elsif params[:variant]
-      variants.find(params[:variant]).put_on_sale(value, params) if variants.exists?(id: params[:variant])
+      variants_including_master.find(params[:variant]).put_on_sale(value, params) if variants_including_master.exists?(id: params[:variant])
     end
   end
   alias :create_sale :put_on_sale
