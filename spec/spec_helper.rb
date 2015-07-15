@@ -33,7 +33,7 @@ FactoryGirl.find_definitions
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-
+  config.include Devise::TestHelpers, type: :controller
   # == URL Helpers
   #
   # Allows access to Spree's routes in specs:
