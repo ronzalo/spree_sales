@@ -1,9 +1,28 @@
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @sale_price } %>
+
 <div id="add_sales_price_form" class="panel panel-default">
   <div class="panel-heading">
     <h1 class="panel-title"><%= Spree.t('add_product_sale_prices') %></h1>
   </div>
     <div class="panel-body">
-    <%= form_for [:admin, @product, Spree::SalePrice.new] do |f| %>
+    <%= form_for [:admin, @product, @sale_price] do |f| %>
+      <div class="row">
+        <div class="col-md-4 form-group">
+          <%= f.label :calculator %>
+          <%= f.select :calculator, sale_calculators, {}, {:class => 'select2'} %>
+        </div>
+
+        <div class="col-md-4 form-group">
+          <%= f.label :currency %>
+          <%= select_tag "sale_price[currency]", spree_sale_currencies, class: 'select2' %>
+        </div>
+
+        <div class="col-md-4 form-group">
+          <%= f.label :variant %>
+          <%= select_tag "sale_price[variant]", options_from_collection_for_select(@variants, :first, :last, @product.master.id), class: 'select2' %>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-md-4 form-group">
           <%= f.label :value, raw(Spree.t(:sale_price) + content_tag(:span, ' *', class: 'required')) %>

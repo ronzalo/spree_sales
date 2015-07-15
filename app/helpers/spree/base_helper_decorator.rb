@@ -20,4 +20,23 @@ Spree::BaseHelper.class_eval do
   def active_for_sale_price product, sale_price
     product.current_sale_in(Spree::Config[:currency]) == sale_price
   end
+
+  def spree_sale_currencies
+    currencies = ::Money::Currency.table.map do |code, details|
+      iso = details[:iso_code]
+      [iso, "#{details[:name]} (#{iso})"]
+    end
+
+    currencies << [:all_currencies, Spree.t(:all_currencies)]
+
+    options_from_collection_for_select(currencies, :first, :last, Spree::Config[:currency])
+  end
+
+  def sale_calculators
+    calculators = Spree::SalesConfiguration::Config.calculators.map do |calculator|
+      [Spree.t("sale_calculators.#{calculator.name.demodulize.underscore}.name"), calculator.name]
+    end
+
+    options_for_select(calculators)
+  end
 end

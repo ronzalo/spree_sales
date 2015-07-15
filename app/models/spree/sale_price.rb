@@ -1,5 +1,6 @@
 module Spree
   class SalePrice < ActiveRecord::Base
+    attr_accessor :currency, :variant
 
     # TODO validations
     belongs_to :default_price, :class_name => "Spree::Price", :foreign_key => "price_id"
@@ -22,12 +23,19 @@ module Spree
     #def self.calculators
     #  Rails.application.config.spree.calculators.send(self.to_s.tableize.gsub('/', '_').sub('spree_', ''))
     #end
+    def initialize attrs={}
+      attrs[:calculator] = attrs[:calculator].constantize.new() if attrs[:calculator].present?
+
+      # ToDo - Pendiente queda asignar el id del precio que se esta cambiando
+
+      super attrs
+    end
 
     def calculator_type
       calculator.class.to_s if calculator
     end
 
-    def price
+    def new_amount
       calculator.compute self
     end
 
@@ -52,7 +60,7 @@ module Spree
 
     # Convenience method for displaying the price of a given sale_price in the table
     def display_price
-      Spree::Money.new(value, {currency: currency})
+      Spree::Money.new(new_amount, {currency: currency})
     end
   end
 end

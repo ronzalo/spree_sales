@@ -5,9 +5,11 @@ Spree::Variant.class_eval do
   delegate_belongs_to :default_price, :sale_price, :original_price, :on_sale?
 
   def put_on_sale value, params={}
-    all_currencies = params[:all_currencies] || true
-
-    run_on_prices(all_currencies) { |p| p.put_on_sale value, params }
+    if !params[:currency] or params[:currency] == 'all_currencies' or params[:currency] == :all_currencies
+      run_on_prices(true) { |p| p.put_on_sale value, params }
+    elsif params[:currency]
+      prices.find_by(currency: params[:currency]).put_on_sale(value, params) if prices.exists?(currency: params[:currency])
+    end
   end
   alias :create_sale :put_on_sale
 
