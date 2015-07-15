@@ -1,7 +1,8 @@
-SpreeSales
+Spree Sales
 ==========
+[![Code Climate](https://codeclimate.com/github/ronzalo/spree_sales/badges/gpa.svg)](https://codeclimate.com/github/ronzalo/spree_sales)
 
-Add sales prices to products
+Add sales prices to products and variants
 
 Installation
 ------------
@@ -22,8 +23,10 @@ bundle exec rails g spree_sales:install
 Usage
 -----
 
-At the moment there is only a Ruby interface because I haven't had time to make an admin interface yet. I hope to be able
-to get to that soon.
+~~At the moment there is only a Ruby interface because I haven't had time to make an admin interface yet. I hope to be able
+to get to that soon.~~
+
+Complete admin interface is available!
 
 Simple example assuming you have a product in your database with the price of $20 and you want to put it on sale
 immediately for $10:
@@ -39,14 +42,6 @@ immediately for $10:
     puts product.original_price.to_f     # => 20.0
     puts product.on_sale?                # => true
 
-By default it uses the supplied Spree::Calculator::DollarAmountSalePriceCalculator which essentially just returns the
-value you give it as the sale price.
-
-You can also give a certain percentage off by specifying that you want to use Spree::Calculator::PercentOffSalePriceCalculator.
-Note that the percentage is given as a float between 0 and 1, not the integer amount from 0 to 100.
-
-    product.put_on_sale 0.2, "Spree::Calculator::PercentOffSalePriceCalculator"
-    puts product.price.to_f              # => 16.0
 
 This extension gives you all of the below methods on both your Products and Variants. If accessed on the Product when reading values,
 it will return values from your Master variant. If accessed on the Product when writing values, it will by default update
@@ -153,6 +148,12 @@ Simply add this require statement to your spec_helper:
 require 'spree_sales/factories'
 ```
 
+ToDo
+------
+
+Update docs, add more tests.
+
 Forked from @jonathandean <https://github.com/jonathandean/spree-sale-pricing>
+Improved by all contributors.
 
 Copyright (c) 2014 Gonzalo Moreno <https://github.com/acidlabs/>, released under the New BSD License
