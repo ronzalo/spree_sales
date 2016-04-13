@@ -4,7 +4,7 @@ describe Spree::Admin::SalePricesController, type: :controller do
   routes { Spree::Core::Engine.routes }
   let(:product) { mock_model(Spree::Product, touch: nil, sale_prices: [], variants_including_master: []) }
   let(:sale_price) { mock_model(Spree::SalePrice) }
-  let(:user) { mock_model(Spree::User) }
+  let(:user) { create(:user) }
 
   before do
     controller.stub(:spree_current_user).and_return(user)
