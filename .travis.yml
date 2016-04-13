@@ -10,3 +10,7 @@ before_script:
   - bundle exec rake test_app
 script:
   - bundle exec rspec spec
+branches:
+  only:
+    - master
+    - 3-0-stable
