@@ -1,0 +1,30 @@
+# Sample localization file for Russian. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+ru:
+  spree:
+    sale_price: "Цена со скидкой"
+    original_price: "Искомая цена"
+    product_sale_prices: "Цены со скидкой"
+    add_product_sale_prices: "Добавить цену со скидкой"
+    sale_price_start_at: "Начальная дата скидки"
+    sale_price_end_at: "Конечная дата скидки"
+    sale_price_enabled: "Рабочая"
+    sale_price_active: "Активная"
+    on_sale_from: "Распродажа от: "
+    sale_calculators:
+      amount_sale_price_calculator:
+        name: "Продажная цена"
+      percent_off_sale_price_calculator:
+        name: "Процент с искомой цены"
+    all_currencies: "Все валюты"
+  activerecord:
+    attributes:
+      spree/sale_price:
+        value: "Цена"
+        start_at: "От"
+        end_at: "До"
+    models:
+      spree/sale_price:
+        one: "Скидочная цена"
+        other: "Скидочные цены"
