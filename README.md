@@ -2,6 +2,8 @@ Spree Sales
 ==========
 [![Code Climate](https://codeclimate.com/github/ronzalo/spree_sales/badges/gpa.svg)](https://codeclimate.com/github/ronzalo/spree_sales)
 
+[![Build Status](https://travis-ci.org/ronzalo/spree_sales.svg?branch=master)](https://travis-ci.org/ronzalo/spree_sales)
+
 Add sales prices to products and variants
 
 Installation
@@ -31,7 +33,7 @@ Complete admin interface is available!
 Simple example assuming you have a product in your database with the price of $20 and you want to put it on sale
 immediately for $10:
 
-    product = Spree::Product.first
+    product = Spree::Product.first # or variant
 
     puts product.price.to_f              # => 20.0
     puts product.on_sale?                # => false
