@@ -1,0 +1,27 @@
+bg:
+  spree:
+    sale_price: "Цена на намаление"
+    original_price: "Оригинална цена"
+    product_sale_prices: "Цени на намаление"
+    add_product_sale_prices: "Добави намаление"
+    sale_price_start_at: "Начало на намалението"
+    sale_price_end_at: "Край на намалението"
+    sale_price_enabled: "Активирана"
+    sale_price_active: "Активна"
+    on_sale_from: "На намаление от: "
+    sale_calculators:
+      amount_sale_price_calculator:
+        name: Намаление сума
+      percent_off_sale_price_calculator:
+        name: Намаление процент
+    all_currencies: Всички валути
+  activerecord:
+    attributes:
+      spree/sale_price:
+        value: Цена
+        start_at: Валидна от
+        end_at: Валидна до
+    models:
+      spree/sale_price:
+        one: Цена на намаление
+        other: Цени на намаление
