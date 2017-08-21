@@ -12,7 +12,7 @@ Installation
 Add spree_sales to your Gemfile:
 
 ```ruby
-gem 'spree_sales'
+gem 'spree_sales', github: 'ronzalo/spree_sales'
 ```
 
 Bundle your dependencies and run the installation generator:
