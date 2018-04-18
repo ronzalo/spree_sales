@@ -1,8 +1,8 @@
 module Spree
   module Admin
     class SalePricesController < BaseController
-      before_filter :load_product
-      before_filter :load_sale_prices
+      before_action :load_product
+      before_action :load_sale_prices
 
       respond_to :js, :html
 
@@ -13,7 +13,10 @@ module Spree
 
       # Create a new sale price
       def create
+
         @sale_price = Spree::SalePrice.new sale_price_params
+        # rails 5 the belongs_to association is required by default
+        @sale_price.price = @product.master.default_price
 
         if @sale_price.valid?
           @product.put_on_sale sale_price_params[:value], sale_price_params

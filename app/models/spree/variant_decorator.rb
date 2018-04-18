@@ -2,7 +2,7 @@ Spree::Variant.class_eval do
 
   has_many :sale_prices, through: :prices
 
-  delegate_belongs_to :default_price, :sale_price, :original_price, :on_sale?
+  delegate :sale_price, :original_price, :on_sale?, to: :default_price
 
   def put_on_sale value, params={}
     if !params[:currency] or params[:currency] == 'all_currencies' or params[:currency] == :all_currencies
