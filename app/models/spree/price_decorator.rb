@@ -61,6 +61,10 @@ Spree::Price.class_eval do
     price
   end
 
+  def price=(price)
+    self[:amount] = Spree::LocalizedNumber.parse(price) unless on_sale?
+  end
+
   def enable_sale
     return nil unless next_active_sale.present?
 
