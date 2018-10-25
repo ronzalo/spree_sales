@@ -62,5 +62,25 @@ module Spree
     def display_price
       Spree::Money.new(new_amount, currency: currency)
     end
+
+    # Custom method: For adding sale price validation #
+    def validate_value value, params
+      variant = Spree::Variant.where(id: params['variant']).first
+      return false unless variant
+
+      valid_sale = true
+      if params['calculator'] == 'Spree::Calculator::AmountSalePriceCalculator'
+        unless variant.original_price.to_f > value.to_f
+          errors.add(:value, 'value should not be greater than the original price')
+          valid_sale = false
+        end
+      else
+        unless value.to_f.between?(0.0, 1.0)
+          errors.add(:value, 'value should between 0 and 1')
+          valid_sale = false
+        end
+      end
+      return valid_sale
+    end
   end
 end

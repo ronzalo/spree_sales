@@ -17,7 +17,7 @@ module Spree
         # rails 5 the belongs_to association is required by default
         @sale_price.price = @product.master.default_price
 
-        if @sale_price.valid?
+        if @sale_price.valid? && @sale_price.validate_value(sale_price_params[:value], sale_price_params)
           @product.put_on_sale sale_price_params[:value], sale_price_params
           redirect_to admin_product_sale_prices_path(@product)
         else
