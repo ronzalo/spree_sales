@@ -1,10 +1,10 @@
 Spree::BaseHelper.class_eval do
   def display_original_price(product_or_variant)
-    current_currency = current_currency || Spree::Config[:currency]
+    current_currency ||= Spree::Config[:currency]
     product_or_variant.original_price_in(current_currency).display_price.to_html
   end
 
-  def display_discount_percent(product_or_variant, append_text = 'Off')
+  def display_discount_percent(product_or_variant, append_text="Off")
     discount = product_or_variant.discount_percent_in current_currency
 
     # number_to_percentage(discount, precision: 0).to_html
@@ -22,7 +22,7 @@ Spree::BaseHelper.class_eval do
   end
 
   def spree_sale_currencies
-    currencies = ::Money::Currency.table.map do |code, details|
+    currencies = ::Money::Currency.table.map do |_code, details|
       iso = details[:iso_code]
       [iso, "#{details[:name]} (#{iso})"]
     end

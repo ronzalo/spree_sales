@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Spree::SalePrice do
   let!(:product) { create(:product, price: 50) }
@@ -8,7 +8,7 @@ describe Spree::SalePrice do
   context "product#put_on_sale" do
     context "when put on sale" do
       before {
-        product.put_on_sale(10, {start_at: 7.days.ago, end_at: 7.days.from_now})
+        product.put_on_sale(10, start_at: 7.days.ago, end_at: 7.days.from_now)
       }
 
       it "should be active sale_price" do
@@ -30,14 +30,14 @@ describe Spree::SalePrice do
 
     it "touches the product, effectively updating the cache" do
       expect(product).to receive(:touch)
-      product.put_on_sale(10, {start_at: 7.days.ago, end_at: 7.days.from_now})
+      product.put_on_sale(10, start_at: 7.days.ago, end_at: 7.days.from_now)
     end
   end
 
   context "variant#put_on_sale" do
     context "when put on sale" do
       before {
-        variant.put_on_sale(10, {start_at: 7.days.ago, end_at: 7.days.from_now})
+        variant.put_on_sale(10, start_at: 7.days.ago, end_at: 7.days.from_now)
       }
 
       it "variant should be on sale" do
@@ -51,15 +51,14 @@ describe Spree::SalePrice do
   end
 
   context "validations" do
-
     it "should validate price over 0" do
       sale_price.value = 0
-      sale_price.should be_invalid
+      expect(sale_price).to be_invalid
     end
 
     it "should validate end_at is greater than start_at" do
       sale_price.end_at = sale_price.start_at - 1.day
-      sale_price.should be_invalid
+      expect(sale_price).to be_invalid
     end
   end
 end

@@ -1,6 +1,6 @@
 module Spree
   class Calculator::AmountSalePriceCalculator < Spree::Calculator
-    # TODO validate that the sale price is less than the original price
+    # TODO: validate that the sale price is less than the original price
     def self.description
       "Calculates the sale price for a Variant by returning the provided fixed sale price"
     end
