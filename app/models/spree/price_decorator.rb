@@ -1,5 +1,4 @@
 Spree::Price.class_eval do
-
   has_many :sale_prices
 
   def put_on_sale value, params={}
@@ -18,17 +17,17 @@ Spree::Price.class_eval do
     sale_price
   end
 
-  # TODO make update_sale method
+  # TODO: make update_sale method
 
   def active_sale
     on_sale? ? first_sale(sale_prices.active) : nil
   end
-  alias :current_sale :active_sale
+  alias_method :current_sale, :active_sale
 
   def next_active_sale
     sale_prices.present? ? first_sale(sale_prices) : nil
   end
-  alias :next_current_sale :next_active_sale
+  alias_method :next_current_sale, :next_active_sale
 
   def sale_price
     on_sale? ? active_sale.new_amount : nil
@@ -64,26 +63,31 @@ Spree::Price.class_eval do
 
   def enable_sale
     return nil unless next_active_sale.present?
+
     next_active_sale.enable
   end
 
   def disable_sale
     return nil unless active_sale.present?
+
     active_sale.disable
   end
 
-  def start_sale(end_time = nil)
+  def start_sale(end_time=nil)
     return nil unless next_active_sale.present?
+
     next_active_sale.start(end_time)
   end
 
   def stop_sale
     return nil unless active_sale.present?
+
     active_sale.stop
   end
 
   private
-    def first_sale(scope)
-      scope.order("created_at DESC").first
-    end
+
+  def first_sale(scope)
+    scope.order("created_at DESC").first
+  end
 end
