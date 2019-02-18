@@ -1,7 +1,8 @@
 <tr id="<%= spree_dom_id(variant) %>">
   <td class="image text-center">
+
     <% if variant.images.present? %>
-      <%= image_tag variant.images.first.attachment.url(:mini) %>
+      <%= mini_image variant %>
     <% end %>
   </td>
   <td> <%= variant.sku_and_options_text %> </td>
