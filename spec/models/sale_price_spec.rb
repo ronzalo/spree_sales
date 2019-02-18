@@ -6,6 +6,16 @@ describe Spree::SalePrice do
   let(:sale_price) { create(:sale_price) }
 
   context "product#put_on_sale" do
+    context "when put on sale with percent calculator" do
+      before {
+        product.put_on_sale(0.1, start_at: 7.days.ago, end_at: 7.days.from_now, calculator: "Spree::Calculator::PercentOffSalePriceCalculator")
+      }
+
+      it "should be active sale_price" do
+        expect(product.price.to_i).to be 45
+      end
+    end
+
     context "when put on sale" do
       before {
         product.put_on_sale(10, start_at: 7.days.ago, end_at: 7.days.from_now)
