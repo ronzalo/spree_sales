@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '>= 3.1.0', '< 4.0'
+  s.add_dependency 'spree_core', '>= 3.1.0', '< 3.9.0'
   s.add_dependency 'spree_extension'
   s.add_dependency 'date_validator'
 
@@ -31,5 +31,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'sqlite3', '~> 1.3.6'
 end
