@@ -76,7 +76,7 @@ module Spree
         end
       else
         unless value.to_f.between?(0.0, 1.0)
-          errors.add(:value, 'value should between 0 and 1')
+          errors.add(:value, "percent should between 0 and 1 (#{calculator.class.title})")
           valid_sale = false
         end
       end
