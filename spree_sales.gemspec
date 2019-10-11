@@ -2,10 +2,10 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_sales'
-  s.version     = '3.1.0'
+  s.version     = '4.0.0'
   s.summary     = 'Add sales prices to products'
   s.description = 'Add sales prices to products'
-  s.required_ruby_version = '>= 2.2.0'
+  s.required_ruby_version = '>= 2.5.0'
 
   s.author    = 'Gonzalo Moreno'
   s.email     = 'gonzalo.moreno@pm.me'
@@ -17,7 +17,9 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '>= 3.1.0', '< 3.9.0'
+  s.add_dependency 'spree_core', '>= 4.0', '< 4.9.0'
+  s.add_dependency 'spree_frontend', '>= 4.0', '< 4.9.0'
+  s.add_dependency 'spree_backend', '>= 4.0', '< 4.9.0'
   s.add_dependency 'spree_extension'
   s.add_dependency 'date_validator'
 
@@ -28,8 +30,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_bot'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3', '~> 1.3.6'
+  s.add_development_dependency 'sqlite3'
 end

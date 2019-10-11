@@ -1,18 +1,14 @@
 language: ruby
 rvm:
-  - 2.3
-  - 2.4
   - 2.5
+  - 2.6
 sudo: false
 cache: bundler
 before_script:
-  - sh -e /etc/init.d/xvfb start
-  - export DISPLAY=:99.0
   - bundle exec rake test_app
 script:
   - bundle exec rspec spec
 branches:
   only:
     - master
-    - 3-1-stable
-    - upgrade-specs-deps
+    - 4-0-stable

@@ -1,5 +1,7 @@
-Spree::Price.class_eval do
-  has_many :sale_prices
+module Spree::PriceDecorator
+  def self.prepended(base)
+    base.has_many :sale_prices
+  end
 
   def put_on_sale value, params={}
     new_sale(value, params).save
@@ -95,3 +97,5 @@ Spree::Price.class_eval do
     scope.order("created_at DESC").first
   end
 end
+
+Spree::Price.prepend(Spree::PriceDecorator)

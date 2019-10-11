@@ -1,15 +1,18 @@
-Spree::Variant.class_eval do
-  has_many :sale_prices, through: :prices
+module Spree::VariantDecorator
+  def self.prepended(base)
+    base.has_many :sale_prices, through: :prices
 
-  delegate :sale_price, :original_price, :on_sale?, to: :default_price
+    base.delegate :sale_price, :original_price, :on_sale?, to: :default_price
+  end
 
-  def put_on_sale value, params={}
+  def put_on_sale(value, params = {})
     if !params[:currency] || (params[:currency] == "all_currencies") || (params[:currency] == :all_currencies)
-      run_on_prices(true) {|p| p.put_on_sale value, params }
+      run_on_prices(true) { |p| p.put_on_sale value, params }
     elsif params[:currency]
       prices.find_by(currency: params[:currency]).put_on_sale(value, params) if prices.exists?(currency: params[:currency])
     end
   end
+
   alias_method :create_sale, :put_on_sale
 
   # TODO: make update_sale method
@@ -17,11 +20,13 @@ Spree::Variant.class_eval do
   def active_sale_in(currency)
     price_in(currency).active_sale
   end
+
   alias_method :current_sale_in, :active_sale_in
 
   def next_active_sale_in(currency)
     price_in(currency).next_active_sale
   end
+
   alias_method :next_current_sale_in, :next_active_sale_in
 
   def sale_price_in(currency)
@@ -40,19 +45,19 @@ Spree::Variant.class_eval do
     Spree::Price.new variant_id: id, currency: currency, amount: price_in(currency).original_price
   end
 
-  def enable_sale(all_currencies=true)
+  def enable_sale(all_currencies = true)
     run_on_prices(all_currencies, &:enable_sale)
   end
 
-  def disable_sale(all_currencies=true)
+  def disable_sale(all_currencies = true)
     run_on_prices(all_currencies, &:disable_sale)
   end
 
-  def start_sale(end_time=nil, all_currencies=true)
-    run_on_prices(all_currencies) {|p| p.start_sale end_time }
+  def start_sale(end_time = nil, all_currencies = true)
+    run_on_prices(all_currencies) { |p| p.start_sale end_time }
   end
 
-  def stop_sale(all_currencies=true)
+  def stop_sale(all_currencies = true)
     run_on_prices(all_currencies, &:stop_sale)
   end
 
@@ -60,9 +65,11 @@ Spree::Variant.class_eval do
 
   def run_on_prices(all_currencies)
     if all_currencies && prices.present?
-      prices.each {|p| yield p }
+      prices.each { |p| yield p }
     else
       yield default_price
     end
   end
 end
+
+Spree::Variant.prepend(Spree::VariantDecorator)
