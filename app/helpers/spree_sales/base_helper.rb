@@ -1,10 +1,10 @@
-module Spree::BaseHelperDecorator
+module SpreeSales::BaseHelper
   def display_original_price(product_or_variant)
     current_currency ||= Spree::Config[:currency]
     product_or_variant.original_price_in(current_currency).display_price.to_html
   end
 
-  def display_discount_percent(product_or_variant, append_text="Off")
+  def display_discount_percent(product_or_variant, append_text = "Off")
     discount = product_or_variant.discount_percent_in current_currency
 
     # number_to_percentage(discount, precision: 0).to_html
@@ -17,7 +17,7 @@ module Spree::BaseHelperDecorator
   end
 
   # Check if a sale is the current sale for a product, returns true or false
-  def active_for_sale_price product, sale_price
+  def active_for_sale_price(product, sale_price)
     product.current_sale_in(Spree::Config[:currency]) == sale_price
   end
 
@@ -33,12 +33,11 @@ module Spree::BaseHelperDecorator
   end
 
   def sale_calculators
-    calculators = Spree::SalesConfiguration::Config.calculators.map do |calculator|
+    calculators = SpreeSales::Config[:sale_calculators].map do |calculator|
+      calculator = calculator.constantize
       [calculator.title, calculator.name]
     end
 
     options_for_select(calculators)
   end
 end
-
-Spree::BaseHelper.prepend(Spree::BaseHelperDecorator)
