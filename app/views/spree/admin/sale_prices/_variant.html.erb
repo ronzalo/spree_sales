@@ -5,7 +5,7 @@
       <%= mini_image variant %>
     <% end %>
   </td>
-  <td> <%= variant.sku_and_options_text %> </td>
+  <td><%= variant_sku_text(variant) %></td>
   <td>
     <%- if variant.sale_prices.any? %>
       <table class="table table-bordered no-marginb">

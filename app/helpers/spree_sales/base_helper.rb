@@ -40,4 +40,8 @@ module SpreeSales::BaseHelper
 
     options_for_select(calculators)
   end
+
+  def variant_sku_text(variant)
+    content_tag((variant.available? ? :span : :del), variant.sku_and_options_text)
+  end
 end

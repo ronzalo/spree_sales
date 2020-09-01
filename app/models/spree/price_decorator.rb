@@ -94,7 +94,7 @@ module Spree::PriceDecorator
   private
 
   def first_sale(scope)
-    scope.order("created_at DESC").first
+    scope.order(SpreeSales::Config[:first_price_order]).first
   end
 end
 

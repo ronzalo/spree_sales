@@ -12,7 +12,11 @@ Installation
 Add spree_sales to your Gemfile:
 
 ```ruby
+# Spree < 4.0
 gem 'spree_sales', github: 'ronzalo/spree_sales', branch: 'master'
+
+# Spree > 4.0
+gem 'spree_sales', github: 'ronzalo/spree_sales', branch: '4-0-stable'
 ```
 
 Bundle your dependencies and run the installation generator:
@@ -20,6 +24,14 @@ Bundle your dependencies and run the installation generator:
 ```shell
 bundle
 bundle exec rails g spree_sales:install
+```
+
+Preferences
+-----------
+
+```ruby
+first_price_order    # If your variant has two or more sale prices, pick the latest by default, but this behaviour can be modified with this preference. Possible values: "created_at asc", "created_at desc", "value asc",  "value desc", etc...
+only_active_variants # Only create sale prices on active variants. Default false
 ```
 
 Usage
@@ -156,6 +168,6 @@ ToDo
 Update docs, add more tests.
 
 Forked from @jonathandean <https://github.com/jonathandean/spree-sale-pricing>
-Improved by all contributors.
+Improved by all [contributors](https://github.com/ronzalo/spree_sales/graphs/contributors).
 
-Copyright (c) 2014 Gonzalo Moreno <https://github.com/acidlabs/>, released under the New BSD License
+Copyright (c) 2014 [Gonzalo Moreno](https://github.com/ronzalo), released under the New BSD License
