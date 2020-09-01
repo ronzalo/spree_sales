@@ -14,12 +14,17 @@ module SpreeSales
 
     initializer "spree.register.sale_configuration", before: :load_config_initializers do |_app|
       SpreeSales::Config = Spree::SalesConfiguration.new
-      SpreeSales::Config[:sale_calculators] << Spree::Calculator::AmountSalePriceCalculator.to_s
-      SpreeSales::Config[:sale_calculators] << Spree::Calculator::PercentOffSalePriceCalculator.to_s
-      
+
       ActiveSupport.on_load :action_controller do
         ActionController::Base.send :helper, SpreeSales::BaseHelper
       end
+    end
+
+    initializer 'spree_sales.setup_calculators' do
+      SpreeSales::Config[:sale_calculators] = [
+        Spree::Calculator::AmountSalePriceCalculator.to_s,
+        Spree::Calculator::PercentOffSalePriceCalculator.to_s
+      ]
     end
 
     def self.activate
