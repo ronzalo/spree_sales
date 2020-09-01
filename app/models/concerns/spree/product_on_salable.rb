@@ -53,8 +53,12 @@ module Spree
     private
 
     def run_on_variants(all_variants)
-      variants.each {|v| yield v } if all_variants && variants.present?
+      saleable_variants.each {|v| yield v } if all_variants && saleable_variants.present?
       yield master
     end
+
+    def saleable_variants
+      SpreeSales::Config[:only_active_variants] ? variants.active : variants
     end
   end
+end

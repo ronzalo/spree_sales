@@ -3,6 +3,10 @@ require "spec_helper"
 describe Spree::SalePrice do
   let!(:product) { create(:product, price: 50) }
   let!(:variant) { create(:variant, price: 50) }
+  
+  let!(:product2) { create(:product, price: 100) }
+  let!(:variant21) { create(:variant, product: product2, price: 100) }
+  let!(:variant22) { create(:variant, product: product2, price: 100, discontinue_on: 1.day.ago) }
   let(:sale_price) { create(:sale_price) }
 
   context "product#put_on_sale" do
@@ -69,6 +73,30 @@ describe Spree::SalePrice do
     it "should validate end_at is greater than start_at" do
       sale_price.end_at = sale_price.start_at - 1.day
       expect(sale_price).to be_invalid
+    end
+  end
+
+  context "only active variants" do
+    it "should put on sale only active variants" do
+      SpreeSales::Config.only_active_variants = true
+      product2.put_on_sale(90, start_at: 7.days.ago, end_at: 7.days.from_now)
+
+      expect(variant21.price.to_i).to eq 90
+      expect(variant22.price.to_i).to eq 100
+    end
+  end
+
+  context "first active sale" do
+    before { product2.disable_sale }
+
+    it "should pick the first active sale using first_price_order preference" do
+      SpreeSales::Config.first_price_order = "value asc"
+
+      product2.put_on_sale(50, start_at: 7.days.ago, end_at: 7.days.from_now)
+      expect(variant21.price.to_i).to eq 50
+
+      product2.put_on_sale(70, start_at: 7.days.ago, end_at: 7.days.from_now)
+      expect(variant21.price.to_i).to eq 50
     end
   end
 end

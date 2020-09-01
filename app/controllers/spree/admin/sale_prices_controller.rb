@@ -49,6 +49,7 @@ module Spree
         @variants = @product.variants_including_master.map do |variant|
           [variant.id, variant.sku_and_options_text]
         end
+
         @variants.insert(0, [:all_variants, Spree.t(:all_variants)])
       end
 

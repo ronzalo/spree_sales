@@ -10,23 +10,17 @@ module Spree
     accepts_nested_attributes_for :calculator
 
     validates :calculator, presence: true
-    validates :value, numericality: {greater_than: 0}
+    validates :value, numericality: { greater_than: 0 }
 
     validates_presence_of :start_at
-    validates :end_at, date: {after: :start_at, allow_blank: true}
+    validates :end_at, date: { after: :start_at, allow_blank: true }
 
     delegate :currency, to: :default_price
 
     scope :active, -> { where(enabled: true).where("(start_at <= ? OR start_at IS NULL) AND (end_at >= ? OR end_at IS NULL)", Time.now, Time.now) }
 
-    # TODO: make this work or remove it
-    # def self.calculators
-    #  Rails.application.config.spree.calculators.send(self.to_s.tableize.gsub('/', '_').sub('spree_', ''))
-    # end
     def initialize attrs={}
       attrs[:calculator] = attrs[:calculator].constantize.new if attrs && attrs[:calculator].present?
-
-      # TODO: - Pendiente queda asignar el id del precio que se esta cambiando
 
       super attrs
     end
@@ -65,18 +59,20 @@ module Spree
 
     # Custom method: For adding sale price validation #
     def validate_value value, params
-      variant = Spree::Variant.where(id: params['variant']).first
-      return false unless variant
+      unless params['variant'] == 'all_variants'
+        variant = Spree::Variant.where(id: params['variant']).first
+        return false unless variant
+      end
 
       valid_sale = true
       if params['calculator'] == 'Spree::Calculator::AmountSalePriceCalculator'
-        unless variant.original_price.to_f > value.to_f
+        if variant && value.to_f > variant.original_price.to_f
           errors.add(:value, 'value should not be greater than the original price')
           valid_sale = false
         end
       else
         unless value.to_f.between?(0.0, 1.0)
-          errors.add(:value, "percent should between 0 and 1 (#{calculator.class.title})")
+          errors.add(:value, "percent should between 0.0 and 1.0 (#{calculator.class.title})")
           valid_sale = false
         end
       end
